@@ -29,6 +29,5 @@ void insert_SNAP(char *stId, char *name, char *address, char *phone, SNAP *datab
 
 void delete_SNAP(char *stId, char *name, char *address, char *phone, SNAP *database);
 
-extern void printFile_SNAP(char *fileName, SNAP *database);
 
 #pragma once

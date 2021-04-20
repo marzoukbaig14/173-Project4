@@ -27,4 +27,3 @@ void insert_CR(char *course, char *room, CR *database);
 
 void delete_CR(char *course, char *room, CR *database);
 
-extern void printFile_CR(char *fileName, CR *database);

@@ -37,6 +37,14 @@ void print_CRDH(CRDH this)
 }
 
 //Executes a query checking what grade a student got in a course
+/*(1) for each tuple t in StudentId-Name-Address-Phone do
+(2) if t has “C. Brown” in its Name component then begin
+(3) let i be the StudentId component of tuple t;
+(4) for each tuple s in Course-StudentId-Grade do
+(5) if s has Course component “CS101” and
+StudentId component i then
+(6) print the Grade component of tuple s;
+end*/ 
 void studentCourseQuery(CSG *CSGdata, SNAP *SNAPdata)
 {
 	int done = 0;
@@ -281,6 +289,7 @@ int main()
 	//Part 1: Testing Insert, Delete, and Lookup functions
 
 	printf("\nDemonstrating examples in Part 1...\n");
+	printf("\nlookup_CSG(CS101, 12345, *, CSGdata)\n");
 	LinkedList lookCSG = lookup_CSG("CS101", "12345", "*", CSGdata);
 	LinkedListIterator iter3 = LinkedList_iterator(lookCSG);
 	printf("\nItems found:\n");
@@ -289,7 +298,8 @@ int main()
 		CSG temp = (CSG) LinkedListIterator_next(iter3);
 		print_CSG(temp);
 	}
-
+	
+	printf("\nlookup_CP(CS205, CS120, CPdata)\n");
 	lookup_CP("CS205", "CS120", CPdata);
 	LinkedList lookCP = lookup_CP("CS205", "CS120", CPdata);
 	LinkedListIterator iter2 = LinkedList_iterator(lookCP);
@@ -300,23 +310,16 @@ int main()
 		print_CP(temp);
 	}
 
+	
+	printf("\ndelete_CR(CS101, *, CRdata)\n");
 	delete_CR("CS101", "*", CRdata);
+
+	printf("\ninsert_CP(CS205, CS120, CPdata)\n");
 	insert_CP("CS205", "CS120", CPdata);
+
+	printf("\ninsert_CP(CS205, CS101, CPdata)\n");
 	insert_CP("CS205", "CS101", CPdata);
 
-	char *CSGfile = "CSGtable.txt";
-	printFile_CSG(CSGfile, CSGdata);
-	char *SNAPfile = "SNAPtable.txt";
-	printFile_SNAP(SNAPfile, SNAPdata);
-	char *CPfile = "CPtable.txt";
-	printFile_CP(CPfile, CPdata);
-	char *CRfile = "CRtable.txt";
-	printFile_CR(CRfile, CRdata);
-	char *CDHfile = "CDHtable.txt";
-	printFile_CDH(CDHfile, CDHdata);
-
-	printf("Reading CSGtable.txt\n");
-	readFile_CSG(CSGfile);
 
 	// Part 2: Testing Queries
 

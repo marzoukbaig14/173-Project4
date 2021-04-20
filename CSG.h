@@ -28,5 +28,5 @@ void insert_CSG(char *course, char *stId, char *grade, CSG *database);
 
 void delete_CSG(char *course, char *stId, char *grade, CSG *database);
 
-extern void printFile_CSG(char *fileName, CSG *database);
-extern CSG* readFile_CSG(char *fileName);
+// extern void printFile_CSG(char *fileName, CSG *database);
+// extern CSG* readFile_CSG(char *fileName);

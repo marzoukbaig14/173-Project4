@@ -218,70 +218,70 @@ void delete_CSG(char *course, char *stId, char *grade, CSG *database)
 	printf("%d item(s) deleted.\n", delCount);
 }
 
-//Prints table to file
-void printFile_CSG(char *fileName, CSG *database)
-{
-	printf("Printing to %s.\n", fileName);
-	FILE *file = fopen(fileName, "w+");
-	if (file == NULL)
-	{
-		printf("Can't open %s\n", fileName);
-		exit(EXIT_FAILURE);
-	}
+// //Prints table to file
+// void printFile_CSG(char *fileName, CSG *database)
+// {
+// 	printf("Printing to %s.\n", fileName);
+// 	FILE *file = fopen(fileName, "w+");
+// 	if (file == NULL)
+// 	{
+// 		printf("Can't open %s\n", fileName);
+// 		exit(EXIT_FAILURE);
+// 	}
 
-	fprintf(file, "CSG Table:\n");
-	fprintf(file, "Course\tStudent ID\tGrade\n");
-	for (int i = 0; i < 1009; i++)
-	{
-		CSG temp = database[i];
-		while (temp != NULL)
-		{
-			fprintf(file, "%s\t%d\t\t%s\n", temp->Course, temp->StudentId, temp->grade);
-			temp = temp->next;
-		}
-	}
+// 	fprintf(file, "CSG Table:\n");
+// 	fprintf(file, "Course\tStudent ID\tGrade\n");
+// 	for (int i = 0; i < 1009; i++)
+// 	{
+// 		CSG temp = database[i];
+// 		while (temp != NULL)
+// 		{
+// 			fprintf(file, "%s\t%d\t\t%s\n", temp->Course, temp->StudentId, temp->grade);
+// 			temp = temp->next;
+// 		}
+// 	}
 
-	fclose(file);
-}
+// 	fclose(file);
+// }
 
-//Reads table from file
-CSG* readFile_CSG(char *fileName)
-{
-	FILE *file = fopen(fileName, "r");
-	if (file == NULL)
-	{
-		printf("Can't open %s\n", fileName);
-		exit(EXIT_FAILURE);
-	}
+// //Reads table from file
+// CSG* readFile_CSG(char *fileName)
+// {
+// 	FILE *file = fopen(fileName, "r");
+// 	if (file == NULL)
+// 	{
+// 		printf("Can't open %s\n", fileName);
+// 		exit(EXIT_FAILURE);
+// 	}
 
-	if (!feof(file))
-	{
-		fscanf(file, "%*[^\n]\n");	//Skip first 2 lines
-		fscanf(file, "%*[^\n]\n");
-	}
+// 	if (!feof(file))
+// 	{
+// 		fscanf(file, "%*[^\n]\n");	//Skip first 2 lines
+// 		fscanf(file, "%*[^\n]\n");
+// 	}
 
-	CSG CSGdata[1009];
-	for (int i = 0; i < 1009; i++)
-	{
-		CSGdata[i] = (CSG) malloc(sizeof(struct CSG));
-		CSGdata[i] = NULL;
-	}
+// 	CSG CSGdata[1009];
+// 	for (int i = 0; i < 1009; i++)
+// 	{
+// 		CSGdata[i] = (CSG) malloc(sizeof(struct CSG));
+// 		CSGdata[i] = NULL;
+// 	}
 
-	char course[5];
-	char *grade = (char*) calloc(2, sizeof(char));
-	char studentId[5];
-	while (!feof(file))
-	{
-		fscanf(file, "%s\t", course);
-		printf("%s\n", course);
-		fscanf(file, "%s\t\t", studentId);
-		printf("%s\n", studentId);
-		fscanf(file, "%s\n", grade);
-		printf("%s\n", grade);
-		insert_CSG(course, studentId, grade, CSGdata);
-	}
+// 	char course[5];
+// 	char *grade = (char*) calloc(2, sizeof(char));
+// 	char studentId[5];
+// 	while (!feof(file))
+// 	{
+// 		fscanf(file, "%s\t", course);
+// 		printf("%s\n", course);
+// 		fscanf(file, "%s\t\t", studentId);
+// 		printf("%s\n", studentId);
+// 		fscanf(file, "%s\n", grade);
+// 		printf("%s\n", grade);
+// 		insert_CSG(course, studentId, grade, CSGdata);
+// 	}
 
-	fclose(file);
-	CSG *ptr = CSGdata;
-	return ptr;
-}
+// 	fclose(file);
+// 	CSG *ptr = CSGdata;
+// 	return ptr;
+// }

@@ -28,4 +28,3 @@ void insert_CP(char *course, char *prereq, CP *database);
 
 void delete_CP(char *course, char *prereq, CP *database);
 
-extern void printFile_CP(char *fileName, CP *database);

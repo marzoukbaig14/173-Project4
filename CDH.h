@@ -29,6 +29,5 @@ void insert_CDH(char *course, char *day, char *hour, CDH *database);
 
 void delete_CDH(char *course, char *day, char *hour, CDH *database);
 
-extern void printFile_CDH(char *fileName, CDH *database);
 
 #pragma once

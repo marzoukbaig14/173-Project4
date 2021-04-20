@@ -4,7 +4,7 @@
 #include "LinkedList.h"
 #include "CDH.h"
 
-int hash_Course_Day(char *course, char *day)
+int hash_course_day(char *course, char *day)
 {
 	int hashVal = 0;
 	for (int i = 0; i < 5; i++)
@@ -15,7 +15,7 @@ int hash_Course_Day(char *course, char *day)
 	return hashVal;
 }
 
-int hash_Course_Day(char *course, char *day);
+int hash_course_day(char *course, char *day);
 
 CDH new_CDH(char *c, char *d, char *h)
 {
@@ -85,7 +85,7 @@ LinkedList lookup_CDH(char *course, char *day, char *hour, CDH *database)
 	}
 	else
 	{
-		int hash = hash_Course_Day(course, day);
+		int hash = hash_course_day(course, day);
 		CDH curr = database[hash];
 		while (curr != NULL)
 		{
@@ -107,7 +107,7 @@ void insert_CDH(char *course, char *day, char *hour, CDH *database)
 	}
 
 	CDH this = new_CDH(course, day, hour);
-	int hash = hash_Course_Day(course, day);
+	int hash = hash_course_day(course, day);
 	CDH curr = database[hash];
 	if (curr == NULL)
 	{
@@ -169,7 +169,7 @@ void delete_CDH(char *course, char *day, char *hour, CDH *database)
 	}
 	else
 	{
-		int hash = hash_Course_Day(course, day);
+		int hash = hash_course_day(course, day);
 		CDH temp = database[hash];
 		if (temp != NULL)
 		{
@@ -205,65 +205,3 @@ void delete_CDH(char *course, char *day, char *hour, CDH *database)
 	printf("%d item(s) deleted.\n", delCount);
 }
 
-void printFile_CDH(char *fileName, CDH *database)
-{
-	printf("Printing to %s.\n", fileName);
-	FILE *file = fopen(fileName, "w+");
-	if (file == NULL)
-	{
-		printf("Can't open %s\n", fileName);
-		exit(EXIT_FAILURE);
-	}
-
-	fprintf(file, "CDH Table:\n");
-	fprintf(file, "Course\tDay\tHour\n");
-	for (int i = 0; i < 1009; i++)
-	{
-		CDH temp = database[i];
-		while (temp != NULL)
-		{
-			fprintf(file, "%s\t%s\t%s\n", temp->Course, temp->day, temp->hour);
-			temp = temp->next;
-		}
-	}
-
-	fclose(file);
-}
-
-CDH* readFile_CDH(char *fileName)
-{
-	FILE *file = fopen(fileName, "r");
-	if (file == NULL)
-	{
-		printf("Can't open %s\n", fileName);
-		exit(EXIT_FAILURE);
-	}
-
-	if (!feof(file))
-	{
-		fscanf(file, "%*[^\n]\n");	//Skip first 2 lines
-		fscanf(file, "%*[^\n]\n");
-	}
-
-	CDH CDHdata[1009];
-	for (int i = 0; i < 1009; i++)
-	{
-		CDHdata[i] = (CDH) malloc(sizeof(struct CDH));
-		CDHdata[i] = NULL;
-	}
-
-	char Course[5];
-	char day[1];
-	char *hour = (char*) calloc(4, sizeof(char));
-	while (!feof(file))
-	{
-		fscanf(file, "%s\t", Course);
-		fscanf(file, "%s\t", day);
-		fscanf(file, "%s\n", hour);
-		insert_CDH(Course, day, hour, CDHdata);
-	}
-
-	fclose(file);
-	CDH *ptr = CDHdata;
-	return ptr;
-}
